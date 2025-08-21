@@ -6,215 +6,241 @@
   <title>Mamma Rossa — Pizzeria in Pirot</title>
   <meta name="description" content="Mamma Rossa — family pizzeria in Pirot since 1992. Signature pizzas with local ingredients, beloved tiramisu, and a wide wine list." />
   <style>
-  /* ----- Improved Day (light) Theme ----- */
-    body.light-mode{
-    /* palette */
-    --bg:#f6f7f9;
-    --card:#ffffff;
-    --muted:#566173;
-    --text:#1a1f29;
-    --accent:#d62828;    /* primary red stays punchy */
-    --accent-2:#1d4ed8;
+    /* ---------- NAV / HAMBURGER & LAYOUT ---------- */
+    .nav{
+      max-width: var(--max);
+      margin: auto;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 14px 20px;
+      justify-content: space-between;
+    }
+    .brand{ font-weight:800; letter-spacing:.4px; text-transform:uppercase; }
+    .brand b{ color: var(--accent); }
 
-    /* background & text */
-    color:var(--text);
-    background:
+    /* inline links on desktop, centered between brand and actions */
+    .nav-links{
+      display: flex;
+      flex: 1;
+      justify-content: center;
+      gap: 18px;
+    }
+
+    /* Right side group (CTA + theme) pinned right */
+    .actions{
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-left: auto;
+    }
+
+    /* Hamburger button (hidden on desktop) */
+    .menu-toggle{
+      display:none;
+      background:transparent;
+      color:var(--text);
+      border:1px solid rgba(255,255,255,.18);
+      padding:8px 10px;
+      border-radius:10px;
+      cursor:pointer;
+      font-size:1.1rem;
+    }
+    body.light-mode .menu-toggle{
+      border-color: rgba(0,0,0,.18);
+      color: var(--text);
+    }
+
+    /* Theme toggle (icon-only) */
+    .toggle-btn{
+      background: #222;
+      color: #fff;
+      border: none;
+      padding: 8px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 1.2rem;
+      transition: background-color .25s ease, color .25s ease;
+    }
+    body.light-mode .toggle-btn{
+      background: #eee;
+      color: #111;
+    }
+
+    /* Links look */
+    nav a{ color:var(--text); text-decoration:none; opacity:.85; padding:10px 12px; border-radius:10px; }
+    nav a:hover{ background:rgba(255,255,255,.06); opacity:1 }
+
+    /* --- Mobile dropdown --- */
+    @media (max-width: 600px){
+      .menu-toggle{ display:inline-flex; align-items:center; }
+      .nav{ justify-content: space-between; }
+      .nav-links{
+        position: fixed;
+        top: 64px;
+        right: 12px;
+        display: none;
+        flex-direction: column;
+        justify-content: flex-start;
+        gap: 0;
+        background: var(--card);
+        border: 1px solid rgba(255,255,255,.12);
+        border-radius: 12px;
+        box-shadow: var(--shadow);
+        min-width: 200px;
+        z-index: 1200;
+        overflow: hidden;
+      }
+      body.light-mode .nav-links{ border-color: rgba(0,0,0,.08); }
+      .nav-links a{
+        display:block;
+        padding:12px 14px;
+        border-bottom:1px solid rgba(255,255,255,.08);
+      }
+      body.light-mode .nav-links a{ border-bottom:1px solid rgba(0,0,0,.06); }
+      .nav-links a:last-child{ border-bottom:none; }
+      header .nav{ gap:10px; padding:10px 12px; }
+    }
+    .nav-links.open{ display:flex; }
+
+    /* ---------- THEMING (LIGHT MODE OVERRIDES) ---------- */
+    body.light-mode{
+      --bg:#f6f7f9;
+      --card:#ffffff;
+      --muted:#566173;
+      --text:#1a1f29;
+      --accent:#d62828;
+      --accent-2:#1d4ed8;
+      color:var(--text);
+      background:
         radial-gradient(1200px 600px at 10% -10%, #ffffff, transparent 60%),
         radial-gradient(900px 500px at 120% 10%, #ffffff, transparent 60%),
         var(--bg);
-        }
-
-    /* header & nav */
+    }
     body.light-mode header{
-    background:rgba(255,255,255,.9);
-    border-bottom:1px solid rgba(0,0,0,.08);
-    backdrop-filter:saturate(160%) blur(8px);
+      background:rgba(255,255,255,.9);
+      border-bottom:1px solid rgba(0,0,0,.08);
+      backdrop-filter:saturate(160%) blur(8px);
     }
     body.light-mode nav a{ opacity:.9; }
     body.light-mode nav a:hover{ background:rgba(0,0,0,.06); }
-
-    /* cards, sections, borders */
     body.light-mode .card,
     body.light-mode form,
     body.light-mode .award,
     body.light-mode .map-box{
-    background:var(--card);
-    border:1px solid rgba(0,0,0,.08);
-    box-shadow:0 10px 26px rgba(0,0,0,.08);
+      background:var(--card);
+      border:1px solid rgba(0,0,0,.08);
+      box-shadow:0 10px 26px rgba(0,0,0,.08);
     }
     body.light-mode .hero-card{
-    background:linear-gradient(180deg, rgba(0,0,0,.02), rgba(0,0,0,.01));
-    border:1px solid rgba(0,0,0,.08);
+      background:linear-gradient(180deg, rgba(0,0,0,.02), rgba(0,0,0,.01));
+      border:1px solid rgba(0,0,0,.08);
     }
-    body.light-mode .ghost{
-    color:var(--text);
-    border-color:rgba(0,0,0,.18);
-    }
+    body.light-mode .ghost{ color:var(--text); border-color:rgba(0,0,0,.18); }
     body.light-mode .badge{
-    background:rgba(0,0,0,.035);
-    border:1px solid rgba(0,0,0,.08);
-    color:#334155;
+      background:rgba(0,0,0,.035);
+      border:1px solid rgba(0,0,0,.08);
+      color:#334155;
     }
-
-
-
-    /* table lines */
     body.light-mode .hours th, 
-    body.light-mode .hours td{
-    border-bottom:1px solid rgba(0,0,0,0.12);
-    }
-
-    /* --------- THE IMPORTANT PART: form fields ---------- */
+    body.light-mode .hours td{ border-bottom:1px solid rgba(0,0,0,0.12); }
     body.light-mode input,
     body.light-mode textarea,
     body.light-mode select{
-    background:#ffffff;
-    color:var(--text);
-    border:1px solid rgba(0,0,0,.18);
-    box-shadow:0 2px 0 rgba(0,0,0,.02) inset;
+      background:#ffffff; color:var(--text);
+      border:1px solid rgba(0,0,0,.18);
+      box-shadow:0 2px 0 rgba(0,0,0,.02) inset;
     }
-    body.light-mode input::placeholder,
-    body.light-mode textarea::placeholder{
-    color:#8a94a6;
-    }
+    body.light-mode input::placeholder, body.light-mode textarea::placeholder{ color:#8a94a6; }
     body.light-mode input:focus,
     body.light-mode textarea:focus,
     body.light-mode select:focus{
-    outline:2px solid rgba(29,78,216,.25); /* soft blue focus */
-    outline-offset:2px;
-    border-color:#9ab3ff;
+      outline:2px solid rgba(29,78,216,.25);
+      outline-offset:2px;
+      border-color:#9ab3ff;
     }
-
-    /* CTA looks nicer on light */
-    body.light-mode .cta{
-    box-shadow:0 8px 24px rgba(214,40,40,.22);
-    }
-
-    /* footer text color */
+    body.light-mode .cta{ box-shadow:0 8px 24px rgba(214,40,40,.22); }
     body.light-mode footer{ color:#6b7280; }
 
-    /* animate theme change a bit */
-    html, body, header, .card, form, .award, .map-box, input, textarea, select{
-    transition: background-color .25s ease, color .25s ease, border-color .25s ease, box-shadow .25s ease;
-    }
-
-
-    .hours {
-        width: 100%;
-        border-collapse: collapse;
-        margin: 1em 0;
-        text-align: center;
-        }
-    .hours th, .hours td {
-        padding: 8px 12px;
-        border-bottom: 1px solid rgba(255,255,255,0.2);
-        }
-    .hours th {
-        text-align: center;
-        font-weight: 700;
-        }
-    .hours th:first-child, .hours td:first-child {
-        text-align: left;
-        font-weight: 600;
-        }
-
-
+    /* ---------- BASE THEME (DARK) ---------- */
     :root{
-      --bg:#0f0f10;          /* near-black */
-      --card:#151618;        /* dark surface */
-      --muted:#a7abb3;       /* subtle text */
-      --text:#e9ecf1;        /* primary text */
-      --accent:#e63946;      /* red accent */
-      --accent-2:#4cc9f0;    /* secondary accent */
-      --max:1080px;          /* layout width */
-      --rad:18px;            /* rounded corners */
+      --bg:#0f0f10;
+      --card:#151618;
+      --muted:#a7abb3;
+      --text:#e9ecf1;
+      --accent:#e63946;
+      --accent-2:#4cc9f0;
+      --max:1080px;
+      --rad:18px;
       --shadow:0 10px 30px rgba(0,0,0,.35);
     }
-
-    *{box-sizing:border-box}
-    html{scroll-behavior:smooth}
+    *{ box-sizing:border-box; }
+    html{ scroll-behavior:smooth; }
     body{
-      margin:0; font:16px/1.6 system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
-      color:var(--text); background:radial-gradient(1200px 600px at 10% -10%, #1e1f22, transparent 60%),
-                          radial-gradient(900px 500px at 120% 10%, #1b1c1f, transparent 60%),
-                          var(--bg);
+      margin:0;
+      font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,Helvetica,Arial,"Apple Color Emoji","Segoe UI Emoji";
+      color:var(--text);
+      background:
+        radial-gradient(1200px 600px at 10% -10%, #1e1f22, transparent 60%),
+        radial-gradient(900px 500px at 120% 10%, #1b1c1f, transparent 60%),
+        var(--bg);
     }
 
-    /* Header */
+    /* ---------- HEADER ---------- */
     header{
-      position:sticky; top:0; z-index:1000; backdrop-filter: blur(6px);
-      background:rgba(15,15,16,.6); border-bottom:1px solid rgba(255,255,255,.08);
+      position:sticky; top:0; z-index:1000;
+      backdrop-filter: blur(6px);
+      background:rgba(15,15,16,.6);
+      border-bottom:1px solid rgba(255,255,255,.08);
     }
-    .nav{ max-width:var(--max); margin:auto; display:flex; align-items:center; gap:16px; padding:14px 20px; }
-    .brand{ font-weight:800; letter-spacing:.4px; text-transform:uppercase;}
-    .brand b{color:var(--accent)}
-    nav a{ color:var(--text); text-decoration:none; opacity:.85; padding:10px 12px; border-radius:10px; }
-    nav a:hover{ background:rgba(255,255,255,.06); opacity:1 }
-    .spacer{ flex:1 }
-    .cta{ display:inline-flex; align-items:center; gap:10px; padding:10px 14px; border-radius:12px; background:var(--accent); color:white; text-decoration:none; font-weight:700; box-shadow:var(--shadow);}
+    .cta{
+      display:inline-flex; align-items:center; gap:10px;
+      padding:10px 14px; border-radius:12px;
+      background:var(--accent); color:white; text-decoration:none; font-weight:700;
+      box-shadow:var(--shadow);
+    }
     .cta:hover{ filter:brightness(1.05) }
 
-    /* Hero */
-    .hero{ max-width:var(--max); margin:40px auto; padding:24px; display:grid; grid-template-columns: 1.2fr .8fr; gap:24px; align-items:center;}
-    .hero-card{ background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02)); border:1px solid rgba(255,255,255,.08); padding:28px; border-radius:var(--rad); box-shadow:var(--shadow);}
+    /* ---------- HERO ---------- */
+    .hero{ max-width:var(--max); margin:40px auto; padding:24px; display:grid; grid-template-columns: 1.2fr .8fr; gap:24px; align-items:center; }
+    .hero-card{ background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02)); border:1px solid rgba(255,255,255,.08); padding:28px; border-radius:var(--rad); box-shadow:var(--shadow); }
     .hero h1{ font-size:clamp(28px, 4vw, 48px); line-height:1.1; margin:0 0 12px }
     .hero p.lead{ color:var(--muted); margin:0 0 18px }
     .badges{ display:flex; flex-wrap:wrap; gap:8px; margin:14px 0 22px }
     .badge{ padding:6px 10px; border-radius:999px; background:rgba(255,255,255,.07); border:1px solid rgba(255,255,255,.1); font-size:12px; color:#d7dbe2 }
-
-    .hero-media-inner{
-    width: 100%;
-    height: auto;             
-    display: block;
-    border-radius: var(--rad);
-    }
-    .hero-media{ 
-    overflow: visible;       
-    }
+    .hero-media-inner{ width:100%; height:auto; display:block; border-radius: var(--rad); }
+    .hero-media{ overflow: visible; }
     .hero-actions{ display:flex; gap:12px; flex-wrap:wrap; }
     .ghost{ background:transparent; border:1px solid rgba(255,255,255,.18); color:var(--text); text-decoration:none; padding:10px 14px; border-radius:12px; }
-   
-    .full-bleed-image{
-    max-width: var(--max);
-    margin: 32px auto;
-    padding: 0;
-    text-align: center;
-    }
-    .full-bleed-image img{
-    max-width: 100%;
-    height: auto;
-    display: inline-block;
-    }
 
+    .full-bleed-image{ max-width: var(--max); margin: 32px auto; padding: 0; text-align: center; }
+    .full-bleed-image img{ max-width: 100%; height: auto; display: inline-block; }
 
-
-
-
-    /* Sections */
+    /* ---------- SECTIONS ---------- */
     section{ max-width:var(--max); margin:0 auto; padding:32px 24px }
     h2{ font-size:clamp(22px, 3vw, 34px); margin:0 0 12px }
     .muted{ color:var(--muted) }
 
-    /* Menu cards */
+    /* menu cards */
     .grid{ display:grid; grid-template-columns:repeat(4, 1fr); gap:18px }
-    .card{ background:var(--card); border:1px solid rgba(255,255,255,.08); border-radius:var(--rad); padding:18px; box-shadow:var(--shadow);}
+    .card{ background:var(--card); border:1px solid rgba(255,255,255,.08); border-radius:var(--rad); padding:18px; box-shadow:var(--shadow); }
     .card h3{ margin:0 0 6px; font-size:18px }
     .card p{ margin:0; color:var(--muted); font-size:14px }
     .price{ color:#f7c548; font-weight:700; }
 
-    /* Story */
+    /* story */
     .story{ display:grid; grid-template-columns: 1fr 1.2fr; gap:24px; align-items:start }
-    .story img{ width:100%; height:auto; border-radius:var(--rad); border:1px solid rgba(255,255,255,.1); box-shadow:var(--shadow);}
+    .story img{ width:100%; height:auto; border-radius:var(--rad); border:1px solid rgba(255,255,255,.1); box-shadow:var(--shadow); }
 
-    /* Awards */
+    /* awards */
     .awards{ display:grid; grid-template-columns: repeat(3, 1fr); gap:16px }
     .award{ background:var(--card); border:1px solid rgba(255,255,255,.08); border-radius:var(--rad); padding:16px }
 
-    /* Location */
+    /* location */
     .map-box{ background:var(--card); border:1px solid rgba(255,255,255,.08); border-radius:var(--rad); overflow:hidden; box-shadow:var(--shadow) }
     .map-box iframe{ width:100%; height:320px; border:0; display:block }
 
-    /* Contact */
+    /* contact */
     .contact{ display:grid; grid-template-columns: 1fr 1fr; gap:24px }
     form{ background:var(--card); border:1px solid rgba(255,255,255,.08); border-radius:var(--rad); padding:18px; box-shadow:var(--shadow); }
     label{ display:block; font-weight:600; margin:10px 0 6px }
@@ -222,17 +248,21 @@
     textarea{ min-height:120px }
     button[type=submit]{ margin-top:10px; }
 
-    footer {
-    text-align: center;
-    padding: 1rem;
-    background-color: #111; /* dark background */
-    color: #aaa;           /* subtle text */
-    font-size: 0.9rem;
-    margin-top: 2rem;
+    footer{
+      text-align: center;
+      padding: 1rem;
+      background-color: #111;
+      color: #aaa;
+      font-size: 0.9rem;
+      margin-top: 2rem;
     }
 
+    /* ---------- GLOBAL TRANSITIONS ---------- */
+    html, body, header, .card, form, .award, .map-box, input, textarea, select{
+      transition: background-color .25s ease, color .25s ease, border-color .25s ease, box-shadow .25s ease;
+    }
 
-    /* Responsive */
+    /* ---------- RESPONSIVE GRID ---------- */
     @media (max-width: 900px){
       .hero{ grid-template-columns:1fr; }
       .grid{ grid-template-columns: 1fr 1fr }
@@ -240,28 +270,39 @@
       .awards{ grid-template-columns:1fr }
       .contact{ grid-template-columns:1fr }
     }
-
     @media (max-width: 560px){ .grid{ grid-template-columns: 1fr } }
   </style>
-  <!-- Flatpickr (calendar/time picker) -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
-<script defer src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 
+  <!-- Flatpickr (calendar/time picker) -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 </head>
 <body>
   <header>
     <div class="nav">
       <div class="brand"><b>Mamma</b> Rossa · Pirot</div>
-      <nav>
+
+      <!-- Hamburger (mobile only) -->
+      <button id="menuToggle"
+              class="menu-toggle"
+              aria-expanded="false"
+              aria-controls="primaryNav"
+              aria-label="Open menu">☰</button>
+
+      <!-- Primary links -->
+      <nav id="primaryNav" class="nav-links">
         <a href="#menu">Menu</a>
         <a href="#story">Our Story</a>
         <a href="#awards">Awards</a>
         <a href="#visit">Visit</a>
         <a href="#contact">Contact</a>
       </nav>
-      <div class="spacer"></div>
-      <a class="cta" href="tel:+38110346618">Call to Order</a>
-      <button id="toggleTheme" class="toggle-btn">🌙 / ☀️</button>
+
+      <!-- Right side actions -->
+      <div class="actions">
+        <a class="cta" href="tel:+38110346618">Call to Order</a>
+        <button id="toggleTheme" class="toggle-btn" aria-label="Toggle theme">🌙</button>
+      </div>
     </div>
   </header>
 
@@ -269,8 +310,8 @@
     <!-- HERO -->
     <section class="hero">
       <div class="hero-card">
-        <h1>Wood‑fired spirit, local soul — since 1992</h1>
-        <p class="lead">Family‑run pizzeria in Pirot blending Italian tradition with carefully chosen local ingredients. Beloved for signature pies like the <strong>Stara Planina</strong> pizza and our classic <strong>tiramisu</strong>.</p>
+        <h1>Wood-fired spirit, local soul — since 1992</h1>
+        <p class="lead">Family-run pizzeria in Pirot blending Italian tradition with carefully chosen local ingredients. Beloved for signature pies like the <strong>Stara Planina</strong> pizza and our classic <strong>tiramisu</strong>.</p>
         <div class="badges">
           <span class="badge">Established 1992</span>
           <span class="badge">Family owned</span>
@@ -282,18 +323,14 @@
           <a class="ghost" href="#menu">See Menu Highlights</a>
         </div>
       </div>
-        <figure class="hero-media" aria-label="Fresh pizza">
-            <img src="My-pizza.png" alt="Fresh pizza coming out of the oven" class="hero-media-inner">
-        </figure>
-
+      <figure class="hero-media" aria-label="Fresh pizza">
+        <img src="My-pizza.png" alt="Fresh pizza coming out of the oven" class="hero-media-inner">
+      </figure>
     </section>
-  
 
     <section class="full-bleed-image">
-    <img src="Multiple-pizzas.png" alt="Pizza table" />
+      <img src="Multiple-pizzas.png" alt="Pizza table" />
     </section>
-
-
 
     <!-- MENU HIGHLIGHTS -->
     <section id="menu" aria-labelledby="menu-title">
@@ -319,10 +356,9 @@
       </div>
     </section>
 
-    <!-- STORY + IMAGE FROM USER -->
+    <!-- STORY -->
     <section id="story" class="story" aria-labelledby="story-title">
       <figure>
-        
         <img src="mamma-rossa-awards.png" alt="Chef Sonja Stojanović standing beside framed international culinary awards and certificates" />
         <figcaption class="muted" style="margin-top:8px">Founder & Master Chef <strong>Sonja Stojanović</strong> — recognized with international culinary awards.</figcaption>
       </figure>
@@ -338,274 +374,247 @@
       </div>
     </section>
 
-    <!-- AWARDS SUMMARY -->
-    <section id="awards" aria-labelledby="awards-title">
-      <h2 id="awards-title">Selected Recognitions</h2>
-      <p class="muted">Displayed at the pizzeria; a testament to decades of dedication.</p>
-      <div class="awards">
-        <div class="award">
-          <h3>Diploma di Onore</h3>
-          <p class="muted">Awarded to Chef Sonja Stojanović for contributions to international culinary culture.</p>
-        </div>
-        <div class="award">
-          <h3>Certificato di Fratellanza</h3>
-          <p class="muted">Recognition from Sicily for collaboration in gastronomy and cultural exchange.</p>
-        </div>
-        <div class="award">
-          <h3>Attestato di Eccellenza</h3>
-          <p class="muted">Italian Gastronomic Academy distinction for culinary commitment and innovation.</p>
-        </div>
-      </div>
-    </section>
-
     <!-- VISIT / LOCATION -->
     <section id="visit" aria-labelledby="visit-title">
       <h2 id="visit-title">Visit Us</h2>
       <div class="map-box">
         <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2962.713424241399!2d22.581964363196477!3d43.15598726712074!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47553d3a9b06291b%3A0x40b63b84f4456908!2sMamma%20Rossa!5e0!3m2!1sen!2srs!4v1724100000000!5m2!1sen!2srs"
-            width="100%"
-            height="400"
-            style="border:0;"
-            allowfullscreen=""
-            loading="lazy"
-            referrerpolicy="no-referrer-when-downgrade"
-            title="Mamma Rossa Pirot on Google Maps">
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2962.713424241399!2d22.581964363196477!3d43.15598726712074!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47553d3a9b06291b%3A0x40b63b84f4456908!2sMamma%20Rossa!5e0!3m2!1sen!2srs!4v1724100000000!5m2!1sen!2srs"
+          width="100%" height="400" style="border:0;" allowfullscreen="" loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade" title="Mamma Rossa Pirot on Google Maps">
         </iframe>
       </div>
 
       <div style="margin-top:14px" class="muted">
         <center>
-        <p><strong>Address:</strong> Lava Tolstoja p+9/2, Pirot 18300, Serbia <span style="opacity:.7"></span></p>
-        <p><strong>Phone:</strong> <a href="tel:+38110346618" style="color:inherit">+381 10 346 618</a></p>
-        <p><strong>Working Hours:</strong></p></center>
-            <table class="hours" aria-labelledby="hours-title">
-            <thead>
-                <tr>
-                <th>Day</th>
-                <th>Opens</th>
-                <th>Closes</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr><td>Sunday</td><td>2:00 PM</td><td>10:00 PM</td></tr>
-                <tr><td>Monday</td><td colspan="2">Closed</td></tr>
-                <tr><td>Tuesday</td><td>10:00 AM</td><td>11:00 PM</td></tr>
-                <tr><td>Wednesday</td><td>10:00 AM</td><td>11:00 PM</td></tr>
-                <tr><td>Thursday</td><td>10:00 AM</td><td>11:00 PM</td></tr>
-                <tr><td>Friday</td><td>10:00 AM</td><td>12:00 AM</td></tr>
-                <tr><td>Saturday</td><td>12:00 PM</td><td>12:00 AM</td></tr>
-            </tbody>
-            </table>
-
-
+          <p><strong>Address:</strong> Lava Tolstoja p+9/2, Pirot 18300, Serbia <span style="opacity:.7"></span></p>
+          <p><strong>Phone:</strong> <a href="tel:+38110346618" style="color:inherit">+381 10 346 618</a></p>
+        
+        <table class="hours" aria-labelledby="hours-title">
+          <thead>
+            <tr><th>Day</th><th>Opens</th><th>Closes</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Sunday</td><td>2:00 PM</td><td>10:00 PM</td></tr>
+            <tr><td>Monday</td><td colspan="2">Closed</td></tr>
+            <tr><td>Tuesday</td><td>10:00 AM</td><td>11:00 PM</td></tr>
+            <tr><td>Wednesday</td><td>10:00 AM</td><td>11:00 PM</td></tr>
+            <tr><td>Thursday</td><td>10:00 AM</td><td>11:00 PM</td></tr>
+            <tr><td>Friday</td><td>10:00 AM</td><td>12:00 AM</td></tr>
+            <tr><td>Saturday</td><td>12:00 PM</td><td>12:00 AM</td></tr>
+          </tbody>
+        </table>
+        </center>
         <p><a class="ghost" href="https://www.google.com/maps/search/?api=1&query=Mamma+Rossa+Pirot" target="_blank" rel="noopener">Open in Google Maps</a></p>
       </div>
     </section>
 
-    <!-- CONTACT -->
-   <section id="contact" aria-labelledby="contact-title">
-        <h2 id="contact-title">Make a Reservation</h2>
-        <div class="contact">
-        <form id="reservation-form">
-        <label for="r-name">Name</label>
-        <input id="r-name" name="name" placeholder="Your name" required />
+    <!-- CONTACT / RESERVATION -->
+    <section id="contact" aria-labelledby="contact-title">
+      <h2 id="contact-title">Make a Reservation</h2>
+      <div class="contact">
+        <!-- UPDATED: form posts to formsubmit.co -->
+        <form id="reservation-form" action="https://formsubmit.co/Guardianmedivhsage@yahoo.com" method="POST">
+          <!-- FormSubmit options -->
+          <input type="hidden" name="_subject" value="Reservation Request from Mamma Rossa website">
+          <input type="hidden" name="_template" value="table">
+          <input type="hidden" name="_captcha" value="false">
+          <!-- Optional: redirect after submit -->
+          <input type="hidden" name="_next" value="#contact">
 
+          <label for="r-name">Name</label>
+          <input id="r-name" name="Name" placeholder="Your name" required />
 
-        <label for="r-email">Email</label>
-        <input id="r-email" type="email" name="email" placeholder="you@example.com" required />
+          <label for="r-email">Email</label>
+          <input id="r-email" type="email" name="Email" placeholder="you@example.com" required />
 
+          <label for="r-phone">Phone (optional)</label>
+          <input id="r-phone" name="Phone" placeholder="+381 ..." />
 
-        <label for="r-phone">Phone (optional)</label>
-        <input id="r-phone" name="phone" placeholder="+381 ..." />
+          <div style="display:grid; grid-template-columns: 1fr 1fr; gap:12px">
+            <div>
+              <label for="r-date">Date</label>
+              <input id="r-date" type="text" name="Date" placeholder="Pick a date" required />
+              <small class="muted">Tap to open the calendar.</small>
+            </div>
+            <div>
+              <label for="r-time">Time</label>
+              <input id="r-time" type="text" name="Time" placeholder="Pick a time" required />
+              <small id="r-open-msg" class="muted">Pick a date to see that day’s working hours.</small>
+            </div>
+          </div>
 
+          <label for="r-size">Party size</label>
+          <input id="r-size" type="number" name="Party size" min="1" max="20" value="2" required />
 
-        <div style="display:grid; grid-template-columns: 1fr 1fr; gap:12px">
-        <div>
-            <label for="r-date">Date</label>
-            <input id="r-date" type="text" name="date" placeholder="Pick a date" required />
-            <small class="muted">Tap to open the calendar.</small>
+          <label for="r-msg">Notes (optional)</label>
+          <textarea id="r-msg" name="Notes" placeholder="Allergies, seating preference, occasion..."></textarea>
 
+          <button class="cta" type="submit">Request Reservation</button>
+          <p class="muted" style="margin-top:8px">One reservation per day per device. We’ll confirm your reservation via email or phone.</p>
 
-        </div>
-        <div>
-            <label for="r-time">Time</label>
-            <input id="r-time" type="text" name="time" placeholder="Pick a time" required />
-            <small id="r-open-msg" class="muted">Pick a date to see that day’s working hours.</small>
-
-        </div>
-        </div>
-
-
-        <label for="r-size">Party size</label>
-        <input id="r-size" type="number" name="size" min="1" max="20" value="2" required />
-
-
-        <label for="r-msg">Notes (optional)</label>
-        <textarea id="r-msg" name="message" placeholder="Allergies, seating preference, occasion..."></textarea>
-
-
-        <button class="cta" type="submit">Request Reservation</button>
-        <p class="muted" style="margin-top:8px">One reservation per day per device. We’ll confirm your reservation via email or phone.</p>
+          <noscript>
+            <p class="muted">Note: JavaScript is disabled; time validation may be limited.</p>
+          </noscript>
         </form>
-        </div>
+      </div>
     </section>
-
   </main>
 
   <footer>
-    <p>&copy; 2025 Ognjen Dorde Manic. All rights reserved.</p>
+    <p>&copy; 2025 Mamma Rossa Pizzeria. All rights reserved.</p>
   </footer>
 
-  </footer>
   <script>
-document.addEventListener("DOMContentLoaded", function(){
+    document.addEventListener("DOMContentLoaded", function(){
+      const HOURS = {
+        0: {open: "14:00", close: "22:00"},
+        1: null,
+        2: {open: "10:00", close: "23:00"},
+        3: {open: "10:00", close: "23:00"},
+        4: {open: "10:00", close: "23:00"},
+        5: {open: "10:00", close: "24:00"},
+        6: {open: "12:00", close: "24:00"}
+      };
 
-  const HOURS = {
-    0: {open: "14:00", close: "22:00"},
-    1: null,
-    2: {open: "10:00", close: "23:00"},
-    3: {open: "10:00", close: "23:00"},
-    4: {open: "10:00", close: "23:00"},
-    5: {open: "10:00", close: "24:00"},
-    6: {open: "12:00", close: "24:00"}
-  };
+      // ===== Helpers =====
+      const toMinutes = hhmm => { const [h,m] = hhmm.split(":").map(Number); return h*60+m; };
+      const minutesTo12h = mins => {
+        let h = Math.floor(mins/60), m = mins%60;
+        const ap = h>=12 ? "PM" : "AM";
+        let h12 = h%12; if(h12===0) h12 = 12;
+        return `${h12}:${String(m).padStart(2,"0")} ${ap}`;
+      };
+      const todayISO = () => { const d=new Date(); d.setHours(0,0,0,0); return d.toISOString().slice(0,10); };
+      const keyFor = (email, dateISO) => `reservation:${email.toLowerCase().trim()}:${dateISO}`;
 
-  const RESTAURANT_EMAIL = "customerreservations@gmail.com";
+      // ===== DOM =====
+      const form    = document.getElementById("reservation-form");
+      const nameEl  = document.getElementById("r-name");
+      const emailEl = document.getElementById("r-email");
+      const phoneEl = document.getElementById("r-phone");
+      const dateEl  = document.getElementById("r-date");
+      const timeEl  = document.getElementById("r-time");
+      const sizeEl  = document.getElementById("r-size");
+      const notesEl = document.getElementById("r-msg");
+      const openMsg = document.getElementById("r-open-msg");
 
-  // ===== Helpers =====
-  const toMinutes = hhmm => { const [h,m] = hhmm.split(":").map(Number); return h*60+m; };
-  const minutesTo12h = mins => {
-    let h = Math.floor(mins/60), m = mins%60;
-    const ap = h>=12 ? "PM" : "AM";
-    let h12 = h%12; if(h12===0) h12 = 12;
-    return `${h12}:${String(m).padStart(2,"0")} ${ap}`;
-  };
-  const todayISO = () => { const d=new Date(); d.setHours(0,0,0,0); return d.toISOString().slice(0,10); };
-  const keyFor = (email, dateISO) => `reservation:${email.toLowerCase().trim()}:${dateISO}`;
+      // ===== Flatpickr setup =====
+      const datePicker = flatpickr(dateEl, {
+        dateFormat: "Y-m-d",
+        minDate: todayISO(),
+        disable: [ d => d.getDay() === 1 ], // Mondays closed
+        onChange: function(selectedDates){
+          if(!selectedDates.length){ return; }
+          const d = selectedDates[0];
+          const dow = d.getDay();
+          const hours = HOURS[dow];
+          if(!hours){
+            timePicker.clear();
+            timePicker.set({ minTime: null, maxTime: null, enableTime: true, noCalendar: true });
+            timeEl.disabled = true;
+            openMsg.textContent = "Closed on this day.";
+            return;
+          }
+          const openM = toMinutes(hours.open);
+          const closeM = (hours.close === "24:00") ? 24*60 : toMinutes(hours.close);
 
-  // ===== DOM =====
-  const form    = document.getElementById("reservation-form");
-  const nameEl  = document.getElementById("r-name");
-  const emailEl = document.getElementById("r-email");
-  const phoneEl = document.getElementById("r-phone");
-  const dateEl  = document.getElementById("r-date"); 
-  const timeEl  = document.getElementById("r-time"); 
-  const sizeEl  = document.getElementById("r-size");
-  const notesEl = document.getElementById("r-msg");
-  const openMsg = document.getElementById("r-open-msg");
+          const minHH = hours.open;
+          const maxHH = (closeM === 24*60) ? "23:59" : new Date(0,0,0, Math.floor((closeM-1)/60), (closeM-1)%60).toTimeString().slice(0,5);
 
-  // ===== Flatpickr setup =====
-  // Disable Mondays; Today/Future
-  const datePicker = flatpickr(dateEl, {
-    dateFormat: "Y-m-d",
-    minDate: todayISO(),
-    disable: [
-      function(date){ return date.getDay() === 1; } 
-    ],
-    onChange: function(selectedDates){
-      if(!selectedDates.length){ return; }
-      const d = selectedDates[0];
-      const dow = d.getDay();
-      const hours = HOURS[dow];
-      if(!hours){
-        timePicker.clear();
-        timePicker.set({ minTime: null, maxTime: null, enableTime: true, noCalendar: true });
-        timeEl.disabled = true;
-        openMsg.textContent = "Closed on this day.";
-        return;
-      }
-      const openM = toMinutes(hours.open);
-      const closeM = (hours.close === "24:00") ? 24*60 : toMinutes(hours.close);
+          timeEl.disabled = false;
+          timePicker.set({ minTime: minHH, maxTime: maxHH });
 
-      // Flatpickr expects "HH:MM" 24h
-      const minHH = hours.open;
-      const maxHH = (closeM === 24*60) ? "23:59" : new Date(0,0,0, Math.floor((closeM-1)/60), (closeM-1)%60).toTimeString().slice(0,5);
+          const openTxt  = minutesTo12h(openM);
+          const closeTxt = (closeM===24*60) ? "12:00 AM" : minutesTo12h(closeM);
+          openMsg.textContent = `Open ${openTxt} – ${closeTxt} on the selected day.`;
+        }
+      });
 
-      timeEl.disabled = false;
-      timePicker.set({ minTime: minHH, maxTime: maxHH });
+      const timePicker = flatpickr(timeEl, {
+        enableTime: true,
+        noCalendar: true,
+        time_24hr: true,
+        minuteIncrement: 30,
+        allowInput: false
+      });
 
-      const openTxt  = minutesTo12h(openM);
-      const closeTxt = (closeM===24*60) ? "12:00 AM" : minutesTo12h(closeM);
-      openMsg.textContent = `Open ${openTxt} – ${closeTxt} on the selected day.`;
+      // Initialize time disabled until date picked
+      timeEl.disabled = true;
+      openMsg.textContent = "Pick a date to see that day’s working hours.";
+
+      // ===== Submit handling (validate, then POST to formsubmit) =====
+      form.addEventListener("submit", function(e){
+        // Run our checks first
+        const dateISO = dateEl.value;
+        const time24  = timeEl.value;
+        const email   = emailEl.value.trim();
+
+        if(!dateISO || !time24){
+          e.preventDefault();
+          alert("Please choose a date and time.");
+          return;
+        }
+        if(timeEl.disabled){
+          e.preventDefault();
+          alert("We’re closed on the selected day.");
+          return;
+        }
+        const min = timePicker.config.minTime;
+        const max = timePicker.config.maxTime;
+        if((min && time24 < min) || (max && time24 > max)){
+          e.preventDefault();
+          alert("Selected time is outside our working hours for that day.");
+          return;
+        }
+
+        // One reservation per day per email (client-side)
+        const k = keyFor(email, dateISO);
+        if(localStorage.getItem(k)){
+          e.preventDefault();
+          alert("You’ve already requested a reservation for this date with this email.");
+          return;
+        }
+        localStorage.setItem(k, Date.now().toString());
+
+        // Let the browser submit the form normally to formsubmit.co
+        // (no e.preventDefault here)
+      });
+    });
+
+    // Theme toggle (icon only)
+    const toggleBtn = document.getElementById("toggleTheme");
+    function applyIcon(){
+      toggleBtn.textContent = document.body.classList.contains("light-mode") ? "🌙" : "☀️";
     }
-  });
+    toggleBtn.addEventListener("click", ()=>{
+      document.body.classList.toggle("light-mode");
+      localStorage.setItem("theme", document.body.classList.contains("light-mode") ? "light" : "dark");
+      applyIcon();
+    });
+    if(localStorage.getItem("theme")==="light"){ document.body.classList.add("light-mode"); }
+    applyIcon();
 
-  const timePicker = flatpickr(timeEl, {
-    enableTime: true,
-    noCalendar: true,
-    time_24hr: true,      
-    minuteIncrement: 30,  
-    allowInput: false
-  });
-
-  // Initialize time disabled until date picked
-  timeEl.disabled = true;
-  openMsg.textContent = "Pick a date to see that day’s working hours.";
-
-  // ===== Submit handling =====
-  form.addEventListener("submit", function(e){
-    e.preventDefault();
-
-    const name   = nameEl.value.trim();
-    const email  = emailEl.value.trim();
-    const phone  = phoneEl.value.trim();
-    const dateISO= dateEl.value;  
-    const time24 = timeEl.value;   
-    const size   = sizeEl.value;
-    const notes  = notesEl.value.trim();
-
-    if(!dateISO || !time24){
-      alert("Please choose a date and time.");
-      return;
+    // Mobile nav toggle
+    const menuBtn = document.getElementById('menuToggle');
+    const primaryNav = document.getElementById('primaryNav');
+    function closeMenu(){
+      primaryNav.classList.remove('open');
+      menuBtn.setAttribute('aria-expanded', 'false');
     }
-
-    // Guard if closed or outside hours (use current min/max)
-    if(timeEl.disabled){
-      alert("We’re closed on the selected day.");
-      return;
-    }
-    const min = timePicker.config.minTime;
-    const max = timePicker.config.maxTime;
-    if((min && time24 < min) || (max && time24 > max)){
-      alert("Selected time is outside our working hours for that day.");
-      return;
-    }
-
-    // One reservation per day per email (client-side)
-    const k = keyFor(email, dateISO);
-    if(localStorage.getItem(k)){
-      alert("You’ve already requested a reservation for this date with this email.");
-      return;
-    }
-    localStorage.setItem(k, Date.now().toString());
-
-    // Good interface date/time
-    const [H,M] = time24.split(":").map(Number);
-    const timeNice = minutesTo12h(H*60+M);
-
-    const subject = encodeURIComponent(`Reservation Request — ${dateISO} ${timeNice} — ${name}`);
-    const body = encodeURIComponent(
-      `Name: ${name}\nEmail: ${email}\nPhone: ${phone || "-"}\nDate: ${dateISO}\nTime: ${timeNice}\nParty size: ${size}\nNotes: ${notes || "-"}\n\nSent from Mamma Rossa website`
-    );
-
-    window.location.href = `mailto:${RESTAURANT_EMAIL}?subject=${subject}&body=${body}`;
-  });
-});
-const toggleBtn = document.getElementById("toggleTheme");
-function applyIcon(){
-  toggleBtn.textContent = document.body.classList.contains("light-mode") ? "🌙 Night" : "☀️ Day";
-}
-toggleBtn.addEventListener("click", ()=>{
-  document.body.classList.toggle("light-mode");
-  localStorage.setItem("theme", document.body.classList.contains("light-mode") ? "light" : "dark");
-  applyIcon();
-});
-if(localStorage.getItem("theme")==="light"){ document.body.classList.add("light-mode"); }
-applyIcon();
-
-  
-</script>
-
+    menuBtn.addEventListener('click', () => {
+      const isOpen = primaryNav.classList.toggle('open');
+      menuBtn.setAttribute('aria-expanded', String(isOpen));
+    });
+    primaryNav.addEventListener('click', (e) => {
+      if(e.target.tagName === 'A'){ closeMenu(); }
+    });
+    document.addEventListener('keydown', (e) => {
+      if(e.key === 'Escape'){ closeMenu(); }
+    });
+    window.addEventListener('resize', () => {
+      if(window.innerWidth > 600){ closeMenu(); }
+    });
+  </script>
 </body>
 </html>
